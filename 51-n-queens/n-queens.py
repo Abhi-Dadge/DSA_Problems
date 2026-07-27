@@ -1,14 +1,10 @@
 class Solution(object):
     def solveNQueens(self, n):
-        """
-        :type n: int
-        :rtype: List[List[str]]
-        """
         res = []
-        board = [["."]* n for _ in range(n)]
+        board = [["."]*n for _ in range(n)]
         cols = set()
-        dig1 = set()
-        dig2 = set()
+        diag1 = set()
+        diag2 = set()
 
         def backtrack(row):
             if row == n:
@@ -16,20 +12,22 @@ class Solution(object):
                 for r in board:
                     temp.append("".join(r))
                 res.append(temp)
-                return 
+                return
+            
             for col in range(n):
-                if col in cols or (row-col) in dig1 or(row+col)in dig2:
+                if col in cols or (row-col) in diag1 or (row+col) in diag2:
                     continue
-                board[row][col] = "Q"
+                board[row][col]="Q"
                 cols.add(col)
-                dig1.add(row-col)
-                dig2.add(row+col)
+                diag1.add(row-col)
+                diag2.add(row+col)
 
                 backtrack(row+1)
-
+                
                 board[row][col]="."
                 cols.remove(col)
-                dig1.remove(row-col)
-                dig2.remove(row+col)
+                diag1.remove(row-col)
+                diag2.remove(row+col)
         backtrack(0)
-        return res
+        return res        
+
