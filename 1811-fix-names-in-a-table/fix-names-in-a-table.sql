@@ -2,5 +2,5 @@
 select user_id,
 Concat(UPPER(LEFT(name,1)),
 LOWER(SUBSTRING(name,2)))
-AS name from Users
-Order by user_id;
+AS name from Users 
+Order by user_id; 
